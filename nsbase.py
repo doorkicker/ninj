@@ -40,8 +40,25 @@ def var_out(var, s, line=None):
 
 def logd(var):
   return d(log(var))
+
+
+
+
+
+
+
+
+
+
   
-#assume decimals
+'''
+#######################################
+FINDNS() applies template string manipulation to
+product of two unique factors. It attempts to
+find a matching value of I and J that cause
+a certain solution mod a or mod b, to equal zero.
+#######################################
+'''
 def findNs(a, b, cont=False, debug=True):
   p = a*b
   i = d(floor((log(p)/2)-1))
@@ -93,6 +110,29 @@ def findNs(a, b, cont=False, debug=True):
   return None
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+#######################################
+NSRAND() runs findNs() on a randomly generated set of factor, a, and b.
+#######################################
+'''
 def nsRand(cont=False, pause=True):
   x = primes[rnd.randint(0, len(primes)-1)+2]
   y = primes[rnd.randint(0, len(primes)-1)+2]
@@ -100,16 +140,48 @@ def nsRand(cont=False, pause=True):
     _ = x
     x = y
     y = _
-  findNs(x, y)
+  findNs(d(x), d(y))
   print(f"a: {x},  b: {y}")
  
 
- 
-#menu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+#######################################
+TEST_FACTORS() gets user input of some prime numbers for factor x, and factor y.
+If the inputs are blank, it selects one from the list of given primes included with nsbase.py
+It then asks the user if they want to output the whole set of possible solutions to findNs, or
+just return the first generated.
+#######################################
+'''
 def test_factors():
   print("leaving a factor blank will generate one for you")
   factor_x = input("Enter factor to test: ")
   factor_y = input("Enter second factor: ")
+  
   swap = ''
   swap = input("swap factors so smallest factor is A and largest factor is B? y/n: ")
   swap = str.lower(swap)
@@ -118,10 +190,10 @@ def test_factors():
   elif swap in ['', 'y', 'yes']:
     print("defaulting to A<B.")
     if factor_x == '':
-      factor_x = rnd.choice(primes)
+      factor_x = d(rnd.choice(primes))
     
     if factor_y == '':
-      factor_y = rnd.choice(primes)
+      factor_y = d(rnd.choice(primes))
     
     if factor_x > factor_y:
       a = d(factor_y)
