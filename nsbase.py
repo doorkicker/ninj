@@ -3,6 +3,8 @@ import os
 from math import *
 from decimal import *
 from primes import *
+from consolemenu import *
+from consolemenu.items import *
 
 rnd.seed()
 Dec = Decimal
@@ -22,8 +24,11 @@ def ceil(n):
   else:
     return n
     
-def pause():
-  _ = input("press ENTER to continue.")
+def pause(s=None):
+  if s == None:
+    _ = input("press [ENTER] to continue.")
+  else:
+    _ = input(s + ". press [ENTER] to continue.")
 
 def type_out(var, s):
   print(f"{s} type floor: {type(var)}")
@@ -44,7 +49,6 @@ def findNs(a, b, cont=False, debug=True):
   j = d(floor(((floor(log(p))*2)**2)/2))
   limit = d(ceil((p**d('0.5')) / (floor(logd(p)/2)-1)))
   limit = (ceil(limit**(1/(3**d('0.5')))))
-  var_out(limit, 'limit', 46)
   s = ''
   ns = ''
   n = 0
@@ -71,12 +75,8 @@ def findNs(a, b, cont=False, debug=True):
         print(f"limit: {limit} , a: {a}, b: {b}")
         print(f"p: {p}, k: {k}")
         
-        _ = input("press [ENTER] to continue or type 'exit' to quit: ")
-        #if _ == 'exit':
-        #  return i, j, n, limit
-        #else:
-        #  k = 0
-        if cont == False or _ == 'exit' or _ == 'e':
+        pause()
+        if cont == False:
           return i, j, n, limit
         else:
            k = 0
@@ -104,14 +104,55 @@ def nsRand(cont=False, pause=True):
   print(f"a: {x},  b: {y}")
  
 
+ 
+#menu
+def test_factors():
+  print("leaving a factor blank will generate one for you")
+  factor_x = input("Enter factor to test: ")
+  factor_y = input("Enter second factor: ")
+  swap = ''
+  swap = input("swap factors so smallest factor is A and largest factor is B? y/n: ")
+  swap = str.lower(swap)
+  if swap in ['n', 'no']:
+    print("keeping input order.")
+  elif swap in ['', 'y', 'yes']:
+    print("defaulting to A<B.")
+    if factor_x == '':
+      factor_x = rnd.choice(primes)
+    
+    if factor_y == '':
+      factor_y = rnd.choice(primes)
+    
+    if factor_x > factor_y:
+      a = d(factor_y)
+      b = d(factor_x)
+    else:
+      a = d(factor_x)
+      b = d(factor_y)
+  
+  output_set = input("output set of solutions instead of first? y/n (leave blank for 'no'): ")
+  
+  print(f"factors - a: {a},  b: {b}")
+  pause()
+  if output_set in ['', 'no', 'n']: 
+    findNs(a, b, False, False)
+  else:
+    findNS(a, b, True, False)
+  
+  
+  pause()
+
 #TESTS
 #nsRand()
 #findNs(d(17), d(41))
 
 def main():
-  print("if you want a factor generated *for* you, leave its prompt blank and press enter")
-  #a = input("first ")
-  #b = input()
+  menu = ConsoleMenu("Number Swap Factorization", "Based on factor tree conversion to smooth integer 'palettes'")
+  menu_testfactors = FunctionItem("Test factors", test_factors)
+  
+  
+  menu.append_item(menu_testfactors)
+  menu.show()
 
 if __name__ == '__main__':
   main()
