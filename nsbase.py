@@ -22,7 +22,7 @@ def ceil(n):
 
 
 
-
+#assume decimals
 def findNs(a, b, cont=True):
   p = a*b
   i = int(floor((log(p)/2)-1))
@@ -53,12 +53,12 @@ def findNs(a, b, cont=True):
         print(f"limit: {limit} , a: {a}, b: {b}")
         print(f"p: {p}, k: {k}")
         
-        _ = input("press [ENTER] to continue or type 'exit' to quit")
+        _ = input("press [ENTER] to continue or type 'exit' to quit: ")
         #if _ == 'exit':
         #  return i, j, n, limit
         #else:
         #  k = 0
-        if cont == False:
+        if cont == False or _ == 'exit' or _ == 'e':
           return i, j, n, limit
         else:
            k = 0
