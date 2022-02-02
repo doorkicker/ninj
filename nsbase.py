@@ -23,13 +23,13 @@ def ceil(n):
 
 
 #assume decimals
-def findNs(a, b, cont=True):
+def findNs(a, b, cont=False, debug=False):
   p = a*b
-  i = int(floor((log(p)/2)-1))
+  i = d(floor((log(p)/2)-1))
   #j = int(floor(log(p)*2))
-  j = int((int(floor(log(p))*2)**2)/2)
-  limit = ceil((p**0.5) / (floor(log(p)/2)-1))
-  limit = ceil(limit**(1/(3**0.5)))
+  j = d(floor(((floor(log(p))*2)**2)/2))
+  limit = d(ceil((p**d('0.5')) / d(floor(log(p)/2)-1)))
+  limit = d(ceil(limit**(1/(3**d('0.5')))))
   s = ''
   ns = ''
   n = 0
@@ -37,6 +37,7 @@ def findNs(a, b, cont=True):
   
   #ns = str(p)+str(i)+(str(p)[0:-1])+str(j)
   #j = ceil(int(ns)**(1/(e**2))
+
   while i <= limit:
     j = int((int(floor(log(p))*2)**2)/2)
     while j >= 3:
@@ -86,4 +87,6 @@ def nsRand(cont=False, pause=True):
   print(f"a: {x},  b: {y}")
  
 
-nsRand()
+#TESTS
+#nsRand()
+findNs(d(17), d(41))
