@@ -69,13 +69,13 @@ def factor(var):
   
 '''
 #######################################
-FINDNS() applies template string manipulation to
+FIND_NS() applies template string manipulation to
 product of two unique factors. It attempts to
 find a matching value of I and J that cause
 a certain solution mod a or mod b, to equal zero.
 #######################################
 '''
-def findNs(a, b, cont=False, debug=True):
+def find_ns(a, b, cont=False, debug=True):
   results = []
   p = a*b
   i = d(floor((log(p)/2)-1))
@@ -145,7 +145,8 @@ def findNs(a, b, cont=False, debug=True):
 
 
 
-
+def ns_factor():
+  pass
 
 
 
@@ -159,7 +160,7 @@ def findNs(a, b, cont=False, debug=True):
 
 '''
 #######################################
-NSRAND() runs findNs() on a randomly generated set of factor, a, and b.
+NSRAND() runs find_ns() on a randomly generated set of factor, a, and b.
 #######################################
 '''
 def nsRand(cont=False, pause=True):
@@ -169,7 +170,7 @@ def nsRand(cont=False, pause=True):
     _ = x
     x = y
     y = _
-  findNs(d(x), d(y))
+  find_ns(d(x), d(y))
   print(f"a: {x},  b: {y}")
  
 
@@ -202,7 +203,7 @@ def nsRand(cont=False, pause=True):
 #######################################
 TEST_FACTORS() gets user input of some prime numbers for factor x, and factor y.
 If the inputs are blank, it selects one from the list of given primes included with nsbase.py
-It then asks the user if they want to output the whole set of possible solutions to findNs, or
+It then asks the user if they want to output the whole set of possible solutions to find_ns, or
 just return the first generated.
 #######################################
 '''
@@ -238,9 +239,9 @@ def test_factors():
   
   results = None
   if output_set in ['', 'no', 'n']: 
-    results = findNs(a, b, False, False)
+    results = find_ns(a, b, False, False)
   else:
-    results = findNs(a, b, True, False)
+    results = find_ns(a, b, True, False)
   
   
   pause()
@@ -295,7 +296,7 @@ def factor_prod():
 
 #TESTS
 #nsRand()
-#findNs(d(17), d(41))
+#find_ns(d(17), d(41))
 
 def main():
   menu = ConsoleMenu("Number Swap Factorization", "Based on factor tree conversion to smooth integer 'palettes'")
