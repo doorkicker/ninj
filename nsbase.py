@@ -31,7 +31,7 @@ def var_out(var, s, line=None):
   print(f"{s} value: {var}, type: {type(var)}, line: {line}")
   pause()
 
-def logd(var)
+def logd(var):
   return log(var)
   
 #assume decimals
