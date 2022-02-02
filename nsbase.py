@@ -8,6 +8,8 @@ rnd.seed()
 Dec = Decimal
 d = Decimal
 
+mult = 1
+getcontext().prec = 64*mult
 
 
 def floor(n):
@@ -32,7 +34,7 @@ def var_out(var, s, line=None):
   pause()
 
 def logd(var):
-  return log(var)
+  return d(log(var))
   
 #assume decimals
 def findNs(a, b, cont=False, debug=True):
@@ -40,8 +42,9 @@ def findNs(a, b, cont=False, debug=True):
   i = d(floor((log(p)/2)-1))
   #j = int(floor(log(p)*2))
   j = d(floor(((floor(log(p))*2)**2)/2))
-  limit = d(ceil((p**d('0.5')) / d(floor(log(p)/2)-1)))
-  limit = d(ceil(limit**(1/(3**d('0.5')))))
+  limit = d(ceil((p**d('0.5')) / (floor(logd(p)/2)-1)))
+  limit = (ceil(limit**(1/(3**d('0.5')))))
+  var_out(limit, 'limit', 46)
   s = ''
   ns = ''
   n = 0
@@ -103,4 +106,13 @@ def nsRand(cont=False, pause=True):
 
 #TESTS
 #nsRand()
-findNs(d(17), d(41))
+#findNs(d(17), d(41))
+
+def main():
+  print("if you want a factor generated *for* you, leave its prompt blank and press enter")
+  #a = input("first ")
+  #b = input()
+
+if __name__ == '__main__':
+  main()
+  
