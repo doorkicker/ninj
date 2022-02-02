@@ -60,6 +60,7 @@ a certain solution mod a or mod b, to equal zero.
 #######################################
 '''
 def findNs(a, b, cont=False, debug=True):
+  results = []
   p = a*b
   i = d(floor((log(p)/2)-1))
   #j = int(floor(log(p)*2))
@@ -92,10 +93,12 @@ def findNs(a, b, cont=False, debug=True):
         print(f"limit: {limit} , a: {a}, b: {b}")
         print(f"p: {p}, k: {k}")
         
-        pause()
+        #pause()
         if cont == False:
-          return i, j, n, limit
+          results.append({'i': i, 'j': j, 'n': n, 'limit': limit})
+          return results
         else:
+           results.append({'i': i, 'j': j, 'n': n, 'limit': limit})
            k = 0
         
         j = j - 1
@@ -106,9 +109,12 @@ def findNs(a, b, cont=False, debug=True):
     i = i + 1
   
   #else
-  print("no exact match found. Returing None.")
-  return None
-
+  if len(results) == 0:
+    print("no exact match found")
+    #return None
+    return results #empty list
+  else:
+    return results
 
 
 
@@ -206,13 +212,41 @@ def test_factors():
   
   print(f"factors - a: {a},  b: {b}")
   pause()
+  
+  results = None
   if output_set in ['', 'no', 'n']: 
-    findNs(a, b, False, False)
+    results = findNs(a, b, False, False)
   else:
-    findNS(a, b, True, False)
+    results = findNS(a, b, True, False)
   
   
   pause()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #TESTS
 #nsRand()
