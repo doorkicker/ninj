@@ -19,9 +19,20 @@ def ceil(n):
     return floor(n)+1
   else:
     return n
+    
+def pause():
+  _ = input("press ENTER to continue.")
+
+def type_out(var, s):
+  print(f"{s} type floor: {type(var)}")
+  pause()
+
+def var_out(var, s, line=None):
+  print(f"{s} value: {var}, type: {type(var)}, line: {line}")
+  pause()
 
 
-
+  
 #assume decimals
 def findNs(a, b, cont=False, debug=True):
   p = a*b
@@ -38,12 +49,13 @@ def findNs(a, b, cont=False, debug=True):
   #ns = str(p)+str(i)+(str(p)[0:-1])+str(j)
   #j = ceil(int(ns)**(1/(e**2))
   if debug == True:
-    _ = input("press [ENTER] to begin")
+    pause()
   while i <= limit:
-    j = int((int(floor(log(p))*2)**2)/2)
+    j = floor((d(floor(log(p))*2)**2)/2)
+    #var_out(j, 'j', 54)
     while j >= 3:
       ns = str(p)+str(i)+(str(p)[0:-1])+str(j)
-      n = int(ns)
+      n = d(ns)
       valA = (n%(p-1))%a
       valB = (n%(p-1))%b
       if valA == 0 or valA == 1 or valB == 0 or valB == 1:
