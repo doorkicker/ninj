@@ -59,7 +59,7 @@ def findNs(a, b, cont=True):
         #else:
         #  k = 0
         if cont == False:
-          return i, j, n limit
+          return i, j, n, limit
         else:
            k = 0
         
