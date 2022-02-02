@@ -31,7 +31,8 @@ def var_out(var, s, line=None):
   print(f"{s} value: {var}, type: {type(var)}, line: {line}")
   pause()
 
-
+def logd(var)
+  return log(var)
   
 #assume decimals
 def findNs(a, b, cont=False, debug=True):
