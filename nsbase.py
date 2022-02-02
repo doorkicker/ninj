@@ -116,11 +116,11 @@ def findNs(a, b, cont=False, debug=True):
           abtype = "B"
         #pause()
         if cont == False:
-          results.append({'i': i, 'j': j, 'n': n, 'limit': limit, 'np1': n%(p-1), 'abtype': abtype, 'ktotal': k, 'ratio': 'k/a'})
+          results.append({'i': i, 'j': j, 'n': n, 'limit': limit, 'np1': n%(p-1), 'abtype': abtype, 'ktotal': k, 'ratio': k/a})
           print(results)
           return results
         else:
-          results.append({'i': i, 'j': j, 'n': n, 'limit': limit, 'np1': n%(p-1), 'abtype': abtype, 'ktotal': k, 'ratio': 'k/a'})
+          results.append({'i': i, 'j': j, 'n': n, 'limit': limit, 'np1': n%(p-1), 'abtype': abtype, 'ktotal': k, 'ratio': k/a})
           k = 0
         
         j = j - 1
