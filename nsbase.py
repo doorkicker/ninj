@@ -83,6 +83,98 @@ def find_ns(a, b, cont=False, debug=True):
   j = d(floor(((floor(log(p))*2)**2)/2))
   limit = d(ceil((p**d('0.5')) / (floor(logd(p)/2)-1)))
   limit = (ceil(limit**(1/(3**d('0.5')))))
+  jlimit = floor((d(floor(log(p))*2)**2)/2)-100
+  s = ''
+  ns = ''
+  n = 0
+  k = 0
+  ab_type = ''
+  
+  #ns = str(p)+str(i)+(str(p)[0:-1])+str(j)
+  #j = ceil(int(ns)**(1/(e**2))
+  if debug == True:
+    pause()
+  while i <= limit:
+    j = floor((d(floor(log(p))*2)**2)/2)
+    #var_out(j, 'j', 54)
+    while j > jlimit:
+      ns = str(p)+str(i)+(str(p)[0:-1])+str(j)
+      n = d(ns)
+      valA = (n%(p-1))%a
+      valB = (n%(p-1))%b
+      #if valA == 0 or valB == 0 :
+      #  _ = input("found valA or valB that equals either 1 or 0")
+      print(f"ns%a: {ns}, val: {valA},  ij: {i}, {j}")
+      print(f"ns%b: {ns}, val: {valB},  ij: {i}, {j}")
+      #if (n%(p-1))%a == 0 or (n%(p-1))%b == 0:
+      if valA == 0 or valB == 0:
+        print(f"found ns value that works!,  total iterations: {k}, ratio over a: {k/a},  ij: {i}, {j}")
+        print(f"limit: {limit} , a: {a}, b: {b}")
+        print(f"p: {p}, k: {k}")
+        if valA == 0:
+          abtype = "A"
+        else:
+          abtype = "B"
+        #pause()
+        if cont == False:
+          results.append({'i': i, 'j': j, 'n': n, 'limit': limit, 'np1': n%(p-1), 'abtype': abtype, 'ktotal': k, 'ratio': k/a})
+          print(results)
+          return results
+        else:
+          results.append({'i': i, 'j': j, 'n': n, 'limit': limit, 'np1': n%(p-1), 'abtype': abtype, 'ktotal': k, 'ratio': k/a})
+          k = 0
+        
+        j = j - 1
+        k = k + 1
+      else:
+        j = j - 1
+        k = k + 1
+    i = i + 1
+  
+  #else
+  if len(results) == 0:
+    print("no exact match found")
+    #return None
+    return results #empty list
+  else:
+    print(results)
+    return results
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def ns_factor():
+  results = []
+  p = a*b
+  i = d(floor((log(p)/2)-1))
+  #j = int(floor(log(p)*2))
+  j = d(floor(((floor(log(p))*2)**2)/2))
+  limit = d(ceil((p**d('0.5')) / (floor(logd(p)/2)-1)))
+  limit = (ceil(limit**(1/(3**d('0.5')))))
   s = ''
   ns = ''
   n = 0
@@ -138,15 +230,7 @@ def find_ns(a, b, cont=False, debug=True):
   else:
     print(results)
     return results
-
-
-
-
-
-
-
-def ns_factor():
-  pass
+  
 
 
 
