@@ -43,9 +43,25 @@ def logd(var):
 
 
 
+z = Decimal('0E-64')
 
 
-
+def factor(p):
+  i = 0
+  factors = []
+  current = p
+  while i < len(primes):
+    #keep dividing it, until it cant be divided anymore, and THEN increment index
+    if (current/primes[i])%1 < Dec('0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001'):
+      factors.append(primes[i])
+      current = current/primes[i]
+    else:
+      i = i + 1
+  
+  
+  #print(("current: " + str(current)[:32] + ",  factors: " + str(factors)))
+  #return current, factors
+  return factors
 
 
 
@@ -71,6 +87,7 @@ def findNs(a, b, cont=False, debug=True):
   ns = ''
   n = 0
   k = 0
+  ab_type = ''
   
   #ns = str(p)+str(i)+(str(p)[0:-1])+str(j)
   #j = ceil(int(ns)**(1/(e**2))
@@ -84,22 +101,27 @@ def findNs(a, b, cont=False, debug=True):
       n = d(ns)
       valA = (n%(p-1))%a
       valB = (n%(p-1))%b
-      if valA == 0 or valA == 1 or valB == 0 or valB == 1:
-        _ = input("found valA or valB that equals either 1 or 0")
+      #if valA == 0 or valB == 0 :
+      #  _ = input("found valA or valB that equals either 1 or 0")
       print(f"ns%a: {ns}, val: {valA},  ij: {i}, {j}")
       print(f"ns%b: {ns}, val: {valB},  ij: {i}, {j}")
-      if (n%(p-1))%a == 0 or (n%(p-1))%b == 0:
+      #if (n%(p-1))%a == 0 or (n%(p-1))%b == 0:
+      if valA == 0 or valB == 0:
         print(f"found ns value that works!,  total iterations: {k}, ratio over a: {k/a},  ij: {i}, {j}")
         print(f"limit: {limit} , a: {a}, b: {b}")
         print(f"p: {p}, k: {k}")
-        
+        if valA == 0:
+          abtype = "A"
+        else:
+          abtype = "B"
         #pause()
         if cont == False:
-          results.append({'i': i, 'j': j, 'n': n, 'limit': limit})
+          results.append({'i': i, 'j': j, 'n': n, 'limit': limit, 'np1': n%(p-1), 'abtype': abtype, 'ktotal': k, 'ratio': 'k/a'})
+          print(results)
           return results
         else:
-           results.append({'i': i, 'j': j, 'n': n, 'limit': limit})
-           k = 0
+          results.append({'i': i, 'j': j, 'n': n, 'limit': limit, 'np1': n%(p-1), 'abtype': abtype, 'ktotal': k, 'ratio': 'k/a'})
+          k = 0
         
         j = j - 1
         k = k + 1
@@ -114,6 +136,7 @@ def findNs(a, b, cont=False, debug=True):
     #return None
     return results #empty list
   else:
+    print(results)
     return results
 
 
@@ -217,7 +240,7 @@ def test_factors():
   if output_set in ['', 'no', 'n']: 
     results = findNs(a, b, False, False)
   else:
-    results = findNS(a, b, True, False)
+    results = findNs(a, b, True, False)
   
   
   pause()
@@ -247,6 +270,28 @@ def test_factors():
 
 
 
+'''
+#######################################
+factor_prod() takes  specific product, without factors, and attempts to use the template method
+to find a factor
+#######################################
+'''
+def factor_prod():
+  pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #TESTS
 #nsRand()
@@ -255,9 +300,10 @@ def test_factors():
 def main():
   menu = ConsoleMenu("Number Swap Factorization", "Based on factor tree conversion to smooth integer 'palettes'")
   menu_testfactors = FunctionItem("Test factors", test_factors)
-  
+  menu_factor_rand = FunctionItem("Factor a product of your choosing", factor_prod)
   
   menu.append_item(menu_testfactors)
+  menu.append_item(menu_factor_rand)
   menu.show()
 
 if __name__ == '__main__':
