@@ -23,7 +23,7 @@ def ceil(n):
 
 
 #assume decimals
-def findNs(a, b, cont=False, debug=False):
+def findNs(a, b, cont=False, debug=True):
   p = a*b
   i = d(floor((log(p)/2)-1))
   #j = int(floor(log(p)*2))
@@ -37,7 +37,8 @@ def findNs(a, b, cont=False, debug=False):
   
   #ns = str(p)+str(i)+(str(p)[0:-1])+str(j)
   #j = ceil(int(ns)**(1/(e**2))
-
+  if debug == True:
+    _ = input("press [ENTER] to begin")
   while i <= limit:
     j = int((int(floor(log(p))*2)**2)/2)
     while j >= 3:
