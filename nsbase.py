@@ -5,6 +5,7 @@ from decimal import *
 from primes import *
 from consolemenu import *
 from consolemenu.items import *
+from statistics import *
 
 rnd.seed()
 Dec = Decimal
@@ -81,9 +82,14 @@ def find_ns(a, b, cont=False, debug=True):
   i = d(floor((log(p)/2)-1))
   #j = int(floor(log(p)*2))
   j = d(floor(((floor(log(p))*2)**2)/2))
+  
+  #these two calls are dependant on eachother.
   limit = d(ceil((p**d('0.5')) / (floor(logd(p)/2)-1)))
   limit = (ceil(limit**(1/(3**d('0.5')))))
-  jlimit = floor((d(floor(log(p))*2)**2)/2)-100
+  
+  jlimit = floor(floor((d(floor(log(p))*2)**2)/2)/2)
+  #var_out(jlimit, "jlimit")
+  #var_out(floor((d(floor(log(p))*2)**2)/2), "j start")
   s = ''
   ns = ''
   n = 0
