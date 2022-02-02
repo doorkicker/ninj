@@ -46,15 +46,15 @@ def logd(var):
 z = Decimal('0E-64')
 
 
-def factor(p):
+def factor(var):
   i = 0
   factors = []
-  current = p
+  current = var
   while i < len(primes):
     #keep dividing it, until it cant be divided anymore, and THEN increment index
-    if (current/primes[i])%1 < Dec('0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001'):
-      factors.append(primes[i])
-      current = current/primes[i]
+    if (current/d(primes[i]))%1 == d('0'):
+      factors.append(d(primes[i]))
+      current = current/d(primes[i])
     else:
       i = i + 1
   
