@@ -694,11 +694,12 @@ to find a factor by calling ns_factor
 #######################################
 '''
 def factor_prod():
-  p = ''
   p = input("enter a product to factor, leave blank to have one randomly generated for you: ")
   if p == '' or p == None:
     a, b = gen_factors(d(1000), d(10000))
     p = a*b
+  else:
+    p = d(p)
   result = ns_factor(p)
   
   pause()
