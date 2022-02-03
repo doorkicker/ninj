@@ -79,32 +79,85 @@ a certain solution mod a or mod b, to equal zero.
 def find_ns(a, b, cont=False, debug=True):
   results = []
   p = a*b
-  i = d(floor((log(p)/2)-1))
-  #j = int(floor(log(p)*2))
-  j = d(floor(((floor(log(p))*2)**2)/2))
   
+  #INITIALIZE I
+  istart = d(str(floor((logd(p)/2)-1))) #I type0
+  #istart = d(0)                    #I type1
+  
+  i = d(str(istart).split('.')[0])
+  
+  
+  
+  #INITIALIZE J
+  #jstart = d(floor(logd(p)*2))              #J type0
+  jstart = floor(((floor(logd(p))*2)**2)/2) #J type1
+  #jstart = ceil(d(ns)**(1/(d(e)**2)))          #J type3 #has to be activated below, along with one of the others
+  
+  j = d(str(jstart).split('.')[0])
+  
+  # ###############
+  #   LIMITS TYPES
+  # ###############
   #these two calls are dependant on eachother.
-  limit = d(ceil((p**d('0.5')) / (floor(logd(p)/2)-1)))
-  limit = (ceil(limit**(1/(3**d('0.5')))))
+  #JLIMIT type0
+  limit_root = d(ceil((p**d('0.5')) / (floor(logd(p)/2)-1)))
+  limit_root = (ceil(limit_root**(1/(3**d('0.5')))))
   
-  jlimit = floor(floor((d(floor(log(p))*2)**2)/2)/2)
-  #var_out(jlimit, "jlimit")
-  #var_out(floor((d(floor(log(p))*2)**2)/2), "j start")
+  #limit_root = d(ceil((p**d('0.5')) / (floor(logd(p)/2)-1))) #35
+  
+  
+  '''
+  #JLIMIT type0a
+  limit_base = (ceil(limit_root**(1/(3**d('0.5'))))) #35
+  limit_super = limit_base**2 #1225
+  limit_mid = floor(limit_super/2) #612
+  limit_upper = ceil((limit_super*limit_mid).sqrt()) #207
+  jlimit = floor((limit_base/2)**2)
+  j = limit_mid-limit_upper #J type2
+  '''
+  
+  
+  # ########
+  #  LIMITS
+  # ########
+  #limit = limit_base = limit_root**2
+  limit = limit_root
+  #jlimit = floor(floor((d(floor(log(p))*2)**2)/2)/2) #JLIMIT type1
+  #jlimit = floor((limit_root**2)/2)
+  jlimit = d(0)
+  
+  
+  #MISC
   s = ''
   ns = ''
   n = 0
   k = 0
   ab_type = ''
+  ns = str(p)+str(i)+(str(p)[0:-1])+str(j)
+  #jstart = ceil(d(ns)**(1/(d(e)**2)))          #J type3
   
-  #ns = str(p)+str(i)+(str(p)[0:-1])+str(j)
-  #j = ceil(int(ns)**(1/(e**2))
+  
+  # #####
+  # BEGIN
+  # #####
   if debug == True:
+    var_out(j, "j")
+    var_out(jlimit, "jlimit")
+    var_out(limit, "limit")
+    var_out(i, "i")
     pause()
+  
   while i <= limit:
-    j = floor((d(floor(log(p))*2)**2)/2)
-    #var_out(j, 'j', 54)
-    while j > jlimit:
+    j = jstart
+    while j >= jlimit:
       ns = str(p)+str(i)+(str(p)[0:-1])+str(j)
+      #print("p, i, p[0:-1], j, ns")
+      #var_out(p, "p")
+      #var_out(i, "i")
+      #var_out(str(p)[0:-1], "str(p)[0:-1]")
+      #var_out(j, "j")
+      #print(ns)
+      #pause()
       n = d(ns)
       valA = (n%(p-1))%a
       valB = (n%(p-1))%b
