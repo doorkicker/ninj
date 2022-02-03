@@ -525,7 +525,7 @@ def ns_factor(p, cont=False, debug=True):
       
       print(f"n: {ns}, val: {total},  ij: {i}, {j}")
       
-      if p%total == 0 and total != p and total > 1:
+      if p%total == 0 and total != p:
         x = total
         y = p/total
         if x > y:
