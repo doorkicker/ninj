@@ -523,17 +523,17 @@ def ns_factor(p, cont=False, debug=True):
       for x in ls:
         total = total/x
       
-      print(f"n: {ns}, val: {total},  ij: {i}, {j}")
+      print(f"n: {ns}, val: {x},  ij: {i}, {j}")
       
-      if p%total == 0 and total != p:
-        x = total
-        y = p/total
-        if x > y:
-          a = y
-          b = x
+      if p%x == 0 and x != p and total == 1:
+        I = total
+        J = p/total
+        if I > J:
+          a = J
+          b = I
         else:
-          a = x
-          b = y
+          a = I
+          b = J
         print(f"found factor! p: {p},  a: {p/total},  b: {total}")
         print(f"found ns value that works!,  total iterations: {k}, ratio over a: {k/a},  ij: {i}, {j}")
         if cont == False:
@@ -700,7 +700,7 @@ def factor_prod():
     p = a*b
   else:
     p = d(p)
-  result = ns_factor(p)
+  result = ns_factor(p, True)
   
   pause()
 
